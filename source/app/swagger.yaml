@@ -1,0 +1,51 @@
+openapi: "3.0.0"
+info:
+  title: Flask API
+  description: A simple flask API that returns *greetings* for a user.
+  version: "0.1"
+
+paths:
+  /greetings:
+    post:
+      tags:
+      - greetings
+      operationId: app.app.greetings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Mariah
+      responses:
+        200:
+          description: The request was successful!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topics:
+                    type: string
+                    example: Welcome, Mariah!
+        default:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          example: Bad request
+          description: Error description
+        message:
+          type: string
+          example: Review your body request
+          description: Error description
